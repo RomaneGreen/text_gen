@@ -16,14 +16,18 @@ class App extends Component {
         this.pleaseGetText()
   }
    pleaseGetText() {
-    axios.get('http://hipsterjesus.com/api/?`${this.state.paras}`&html=true')
+    axios.get('http://hipsterjesus.com/api/?paras='+this.state.paras+'&html=true')
       .then(res => {
-       const ans = res.data.text;
-       this.setState = {
-         text : ans
-       }
-      })
-  }
+       this.setState = ({
+         text: res.data.text}, function () {
+           console.log(this.state)
+         })
+        })
+        .catch((err) => {
+          console.log(err);
+      }) 
+
+    }
 
 
   render() {
